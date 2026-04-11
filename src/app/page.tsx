@@ -262,7 +262,7 @@ export default function MapPage() {
         {/* Download Buttons */}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <a
-            href="/draft-aturan-peserta.pdf"
+            href="draft-aturan-peserta.pdf"
             download="Aturan-Peserta-PROXIMITI.pdf"
             className="btn btn-primary"
             style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
