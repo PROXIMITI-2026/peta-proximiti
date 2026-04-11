@@ -11,7 +11,6 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { href: '/dashboard/map', label: 'Peta Zonasi', icon: '🗺️' },
-  { href: '/dashboard/announcements', label: 'Pengumuman & Aturan', icon: '📢' },
 ];
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {

@@ -249,13 +249,35 @@ export default function MapPage() {
   return (
     <div style={{ maxWidth: 1000 }}>
       {/* Header */}
-      <div style={{ marginBottom: 20 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--primary)', marginBottom: 4 }}>
-          🗺️ Peta Zonasi Armband
-        </h1>
-        <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
-          Cek apakah lokasi kamu masuk dalam zona wajib armband kaderisasi.
-        </p>
+      <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
+        <div>
+          <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--primary)', marginBottom: 4 }}>
+            🗺️ Peta Zonasi Armband
+          </h1>
+          <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
+            Cek apakah lokasi kamu masuk dalam zona wajib armband kaderisasi.
+          </p>
+        </div>
+        
+        {/* Download Buttons */}
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <a
+            href="/draft-aturan-peserta.pdf"
+            download="Aturan-Peserta-PROXIMITI.pdf"
+            className="btn btn-outline"
+            style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
+          >
+            ⬇️ Aturan Peserta
+          </a>
+          <a
+            href="/draft-aturan-panitia.pdf"
+            download="Aturan-Panitia-PROXIMITI.pdf"
+            className="btn btn-primary"
+            style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
+          >
+            ⬇️ Aturan Panitia
+          </a>
+        </div>
       </div>
 
       {/* GPS Button */}
