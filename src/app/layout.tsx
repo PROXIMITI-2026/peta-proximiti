@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SidebarLayout from "@/components/SidebarLayout";
 
 
 const inter = Inter({
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={`${inter.variable} antialiased`}>
-        {children}
+        <SidebarLayout>
+          {children}
+        </SidebarLayout>
       </body>
     </html>
   );

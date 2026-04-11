@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.100.0",
     "@turf/turf": "^7.3.4",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.8.0",

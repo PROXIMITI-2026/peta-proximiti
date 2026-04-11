@@ -1,21 +1,8 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
 import { useState, ReactNode } from 'react';
 
-interface NavItem {
-  href: string;
-  label: string;
-  icon: string;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { href: '/dashboard/map', label: 'Peta Zonasi', icon: '🗺️' },
-];
-
-export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const router = useRouter();
-  const pathname = usePathname();
+export default function SidebarLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -27,23 +14,20 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <div className="sidebar-logo">🛡️</div>
           <div>
             <div className="sidebar-brand-text">PROXIMITI</div>
-            <div className="sidebar-brand-sub">Management System</div>
+            <div className="sidebar-brand-sub">Map Armband System</div>
           </div>
         </div>
 
         {/* Navigation */}
         <nav className="sidebar-nav">
-          {NAV_ITEMS.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={`sidebar-link ${pathname === item.href ? 'sidebar-link-active' : ''}`}
-              onClick={(e) => { e.preventDefault(); router.push(item.href); setSidebarOpen(false); }}
-            >
-              <span className="sidebar-link-icon">{item.icon}</span>
-              <span>{item.label}</span>
-            </a>
-          ))}
+          <a
+            href="/"
+            className="sidebar-link sidebar-link-active"
+            onClick={(e) => { e.preventDefault(); setSidebarOpen(false); }}
+          >
+            <span className="sidebar-link-icon">🗺️</span>
+            <span>Peta Zonasi</span>
+          </a>
         </nav>
 
         {/* User info at bottom */}
@@ -68,7 +52,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         {/* Topbar on mobile */}
         <header className="topbar">
           <button className="topbar-menu" onClick={() => setSidebarOpen(true)}>☰</button>
-          <span className="topbar-title">PROXIMITI</span>
+          <span className="topbar-title">PROXIMITI MAP</span>
           <span className="topbar-role-badge" style={{ background: `#16a34a15`, color: '#16a34a' }}>
             Akses Publik
           </span>
