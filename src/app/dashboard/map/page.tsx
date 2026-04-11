@@ -264,18 +264,10 @@ export default function MapPage() {
           <a
             href="/draft-aturan-peserta.pdf"
             download="Aturan-Peserta-PROXIMITI.pdf"
-            className="btn btn-outline"
-            style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
-          >
-            ⬇️ Aturan Peserta
-          </a>
-          <a
-            href="/draft-aturan-panitia.pdf"
-            download="Aturan-Panitia-PROXIMITI.pdf"
             className="btn btn-primary"
             style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
           >
-            ⬇️ Aturan Panitia
+            ⬇️ Aturan Peserta
           </a>
         </div>
       </div>
