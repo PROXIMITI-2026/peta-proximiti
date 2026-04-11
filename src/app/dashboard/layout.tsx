@@ -1,59 +1,23 @@
 'use client';
 
-import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
-import { useEffect, useState, ReactNode } from 'react';
-import type { UserRole } from '@/types/database';
+import { useState, ReactNode } from 'react';
 
 interface NavItem {
   href: string;
   label: string;
   icon: string;
-  roles: UserRole[];
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '/dashboard', label: 'Beranda', icon: '🏠', roles: ['peserta', 'gt', 'cdt', 'det', 'inti'] },
-  { href: '/dashboard/points', label: 'Poin Saya', icon: '📊', roles: ['peserta'] },
-  { href: '/dashboard/permits', label: 'Perizinan', icon: '📋', roles: ['peserta', 'gt', 'cdt', 'inti'] },
-  { href: '/dashboard/violations', label: 'Pelanggaran', icon: '⚠️', roles: ['cdt', 'det', 'inti'] },
-  { href: '/dashboard/tokens', label: 'Token Banding', icon: '🎫', roles: ['cdt', 'inti'] },
-  { href: '/dashboard/recap', label: 'Rekapitulasi', icon: '📈', roles: ['det', 'inti'] },
-  { href: '/dashboard/group', label: 'Kelompok', icon: '👥', roles: ['gt'] },
-  { href: '/dashboard/announcements', label: 'Pengumuman', icon: '📢', roles: ['gt', 'cdt', 'det', 'inti'] },
-  { href: '/dashboard/map', label: 'Peta Zonasi', icon: '🗺️', roles: ['peserta', 'gt', 'cdt', 'det', 'inti'] },
-  { href: '/dashboard/stats', label: 'Statistik', icon: '📉', roles: ['inti'] },
-  { href: '/dashboard/audit', label: 'Audit Log', icon: '🔍', roles: ['det', 'inti'] },
+  { href: '/dashboard/map', label: 'Peta Zonasi', icon: '🗺️' },
+  { href: '/dashboard/announcements', label: 'Pengumuman & Aturan', icon: '📢' },
 ];
 
-const ROLE_LABELS: Record<UserRole, { label: string; color: string }> = {
-  peserta: { label: 'Peserta', color: '#16a34a' },
-  gt: { label: 'Group Trainer', color: '#2563eb' },
-  cdt: { label: 'CDT', color: '#dc2626' },
-  det: { label: 'DET Admin', color: '#7c3aed' },
-  inti: { label: 'Core Team', color: '#d97706' },
-};
-
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const { user, loading, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    if (!loading && !user) router.push('/login');
-  }, [user, loading, router]);
-
-  if (loading || !user) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)' }}>
-        <div style={{ width: 32, height: 32, border: '3px solid var(--border)', borderTopColor: 'var(--primary)', borderRadius: '50%', animation: 'spin 0.6s linear infinite' }} />
-      </div>
-    );
-  }
-
-  const filteredNav = NAV_ITEMS.filter(n => n.roles.includes(user.role));
-  const roleInfo = ROLE_LABELS[user.role];
 
   return (
     <div className="dashboard-shell">
@@ -70,7 +34,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
         {/* Navigation */}
         <nav className="sidebar-nav">
-          {filteredNav.map(item => (
+          {NAV_ITEMS.map(item => (
             <a
               key={item.href}
               href={item.href}
@@ -86,17 +50,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         {/* User info at bottom */}
         <div className="sidebar-footer">
           <div className="sidebar-user">
-            <div className="sidebar-avatar" style={{ background: roleInfo.color }}>
-              {user.full_name.charAt(0)}
+            <div className="sidebar-avatar" style={{ background: '#16a34a' }}>
+              P
             </div>
             <div className="sidebar-user-info">
-              <div className="sidebar-user-name">{user.full_name.split(' ')[0]}</div>
-              <div className="sidebar-user-role" style={{ color: roleInfo.color }}>{roleInfo.label}</div>
+              <div className="sidebar-user-name">Pengguna</div>
+              <div className="sidebar-user-role" style={{ color: '#16a34a' }}>Akses Publik</div>
             </div>
           </div>
-          <button className="btn btn-outline btn-sm" onClick={logout} style={{ width: '100%', marginTop: 8 }}>
-            Keluar
-          </button>
         </div>
       </aside>
 
@@ -109,8 +70,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <header className="topbar">
           <button className="topbar-menu" onClick={() => setSidebarOpen(true)}>☰</button>
           <span className="topbar-title">PROXIMITI</span>
-          <span className="topbar-role-badge" style={{ background: `${roleInfo.color}15`, color: roleInfo.color }}>
-            {roleInfo.label}
+          <span className="topbar-role-badge" style={{ background: `#16a34a15`, color: '#16a34a' }}>
+            Akses Publik
           </span>
         </header>
 
