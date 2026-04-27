@@ -3,7 +3,8 @@
 import { useState, ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 /* ── SVG Icons (inline, no emojis) ── */
 const IconMap = () => (
@@ -47,13 +48,13 @@ export default function SidebarLayout({ children }: { children: ReactNode }) {
         {/* Brand */}
         <div className="sidebar-brand">
           <div className="sidebar-logo-wrapper">
-            <Image
-              src="/logo-proximiti.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${basePath}/logo-proximiti.png`}
               alt="PROXIMITI Logo"
               width={38}
               height={38}
-              className="sidebar-logo-img"
-              style={{ width: 38, height: 'auto' }}
+              style={{ width: 38, height: 'auto', borderRadius: 6 }}
             />
           </div>
           <div>
