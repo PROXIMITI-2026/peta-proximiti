@@ -11,7 +11,8 @@
  * 2. Ganti nama file menjadi sesuai variabel PDF_PATH di bawah.
  */
 
-const PDF_PATH = '/draft-aturan-peserta.pdf';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const PDF_PATH = `${basePath}/draft-aturan-peserta.pdf`;
 
 /* ── SVG Icons ── */
 const IconDownload = () => (

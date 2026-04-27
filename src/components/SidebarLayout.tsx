@@ -54,7 +54,6 @@ export default function SidebarLayout({ children }: { children: ReactNode }) {
               height={38}
               className="sidebar-logo-img"
               style={{ width: 38, height: 'auto' }}
-              priority
             />
           </div>
           <div>

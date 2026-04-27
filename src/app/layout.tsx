@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SidebarLayout from "@/components/SidebarLayout";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,8 +15,8 @@ export const metadata: Metadata = {
   title: "PROXIMITI Dashboard — Kaderisasi",
   description: "Dashboard terpusat untuk manajemen peserta dan panitia kaderisasi PROXIMITI — Telkom University.",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/logo-proximiti.png",
+    icon: `${basePath}/favicon.ico`,
+    apple: `${basePath}/logo-proximiti.png`,
   },
 };
 
