@@ -261,6 +261,13 @@ textarea.input {
   font-size: 12px;
 }
 
+/* Sidebar logo image */
+.sidebar-logo-img {
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 /* Leaflet override */
 .leaflet-container {
   height: 100%;

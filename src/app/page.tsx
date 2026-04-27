@@ -31,15 +31,15 @@ const BATAS_BALEENDAH_POLYGON: [number, number][] = [
 ];
 
 const ZONES = [
-  { id: 'telkom-univ',        name: 'Telkom University',         emoji: '🏛️', type: 'zona',  color: '#dc2626', center: [-6.9733, 107.6311] as [number, number] },
-  { id: 'bojongsoang',        name: 'Bojongsoang',               emoji: '🏘️', type: 'zona',  color: '#dc2626', center: [-6.9830, 107.6400] as [number, number] },
-  { id: 'sukapura',           name: 'Sukapura',                  emoji: '🏠', type: 'zona',  color: '#dc2626', center: [-6.9690, 107.6400] as [number, number] },
-  { id: 'sukabirus',          name: 'Sukabirus',                 emoji: '🏡', type: 'zona',  color: '#dc2626', center: [-6.9735, 107.6195] as [number, number] },
-  { id: 'jl-radio',           name: 'Jalan Radio',               emoji: '📻', type: 'zona',  color: '#dc2626', center: [-6.9630, 107.6210] as [number, number] },
-  { id: 'buahbatu',           name: 'Lampu Merah Buahbatu',      emoji: '🚦', type: 'batas', color: '#eab308', center: [-6.9460, 107.6340] as [number, number] },
-  { id: 'batununggal',        name: 'Batununggal',               emoji: '🏢', type: 'zona',  color: '#dc2626', center: [-6.9530, 107.6240] as [number, number] },
-  { id: 'jembatan-baleendah', name: 'Jembatan Kedua Baleendah',  emoji: '🌉', type: 'batas', color: '#eab308', center: [-6.9995, 107.6335] as [number, number] },
-  { id: 'ciganitri',          name: 'Ciganitri',                 emoji: '🏗️', type: 'zona',  color: '#dc2626', center: [-6.9900, 107.6230] as [number, number] },
+  { id: 'telkom-univ',        name: 'Telkom University',         type: 'zona',  color: '#dc2626', center: [-6.9733, 107.6311] as [number, number] },
+  { id: 'bojongsoang',        name: 'Bojongsoang',               type: 'zona',  color: '#dc2626', center: [-6.9830, 107.6400] as [number, number] },
+  { id: 'sukapura',           name: 'Sukapura',                  type: 'zona',  color: '#dc2626', center: [-6.9690, 107.6400] as [number, number] },
+  { id: 'sukabirus',          name: 'Sukabirus',                 type: 'zona',  color: '#dc2626', center: [-6.9735, 107.6195] as [number, number] },
+  { id: 'jl-radio',           name: 'Jalan Radio',               type: 'zona',  color: '#dc2626', center: [-6.9630, 107.6210] as [number, number] },
+  { id: 'buahbatu',           name: 'Lampu Merah Buahbatu',      type: 'batas', color: '#eab308', center: [-6.9460, 107.6340] as [number, number] },
+  { id: 'batununggal',        name: 'Batununggal',               type: 'zona',  color: '#dc2626', center: [-6.9530, 107.6240] as [number, number] },
+  { id: 'jembatan-baleendah', name: 'Jembatan Kedua Baleendah',  type: 'batas', color: '#eab308', center: [-6.9995, 107.6335] as [number, number] },
+  { id: 'ciganitri',          name: 'Ciganitri',                 type: 'zona',  color: '#dc2626', center: [-6.9900, 107.6230] as [number, number] },
 ];
 
 /* ────────────────────────── POINT-IN-POLYGON CHECK ────────────────────────── */
@@ -62,6 +62,28 @@ function checkAllZones(lat: number, lng: number): boolean {
     isPointInPolygon(lat, lng, BATAS_BALEENDAH_POLYGON)
   );
 }
+
+/* ── SVG Icons ── */
+const IconLocate = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+    <circle cx="12" cy="12" r="4" />
+  </svg>
+);
+
+const IconSearch = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+
+const IconPin = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
 
 /* ─────────────────────────────── COMPONENT ─────────────────────────────── */
 export default function MapPage() {
@@ -105,30 +127,30 @@ export default function MapPage() {
       L.polygon(MAIN_ZONE_POLYGON, {
         color: '#dc2626', weight: 3, opacity: 0.85,
         fillColor: '#dc2626', fillOpacity: 0.12, smoothFactor: 1.5,
-      }).addTo(map).bindPopup('<b>🛡️ Zona Wajib Armband</b><br>Seluruh wilayah dalam zona ini wajib memakai armband.');
+      }).addTo(map).bindPopup('<b>Zona Wajib Armband</b><br>Seluruh wilayah dalam zona ini wajib memakai armband.');
 
       // Boundary polygons (dashed yellow)
       L.polygon(BATAS_BUAHBATU_POLYGON, {
         color: '#eab308', weight: 2, opacity: 0.8,
         fillColor: '#eab308', fillOpacity: 0.1, dashArray: '8, 6',
-      }).addTo(map).bindPopup('<b>🚦 Batas Utara — Lampu Merah Buahbatu</b>');
+      }).addTo(map).bindPopup('<b>Batas Utara — Lampu Merah Buahbatu</b>');
 
       L.polygon(BATAS_BALEENDAH_POLYGON, {
         color: '#eab308', weight: 2, opacity: 0.8,
         fillColor: '#eab308', fillOpacity: 0.1, dashArray: '8, 6',
-      }).addTo(map).bindPopup('<b>🌉 Batas Selatan — Jembatan Baleendah</b>');
+      }).addTo(map).bindPopup('<b>Batas Selatan — Jembatan Baleendah</b>');
 
-      // Zone markers
+      // Zone markers — colored circle pins without emoji
       ZONES.forEach((zone) => {
         const icon = L.divIcon({
           className: '',
-          html: `<div style="background:${zone.color};width:30px;height:30px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"><span style="transform:rotate(45deg);font-size:13px">${zone.emoji}</span></div>`,
-          iconSize: [30, 36], iconAnchor: [15, 36], popupAnchor: [0, -36],
+          html: `<div style="background:${zone.color};width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,0.4)"></div>`,
+          iconSize: [12, 12], iconAnchor: [6, 6], popupAnchor: [0, -8],
         });
         L.marker(zone.center, { icon })
           .addTo(map)
-          .bindPopup(`<b>${zone.emoji} ${zone.name}</b><br><small>${zone.type === 'zona' ? 'ZONA WAJIB ARMBAND' : 'AREA TRANSISI'}</small>`)
-          .bindTooltip(zone.name, { direction: 'top', offset: [0, -38] });
+          .bindPopup(`<b>${zone.name}</b><br><small>${zone.type === 'zona' ? 'ZONA WAJIB ARMBAND' : 'AREA TRANSISI'}</small>`)
+          .bindTooltip(zone.name, { direction: 'top', offset: [0, -10] });
       });
 
       const allCoords = [...MAIN_ZONE_POLYGON, ...BATAS_BUAHBATU_POLYGON, ...BATAS_BALEENDAH_POLYGON];
@@ -150,7 +172,7 @@ export default function MapPage() {
   const handleLocateMe = useCallback(() => {
     if (!mapInstance.current) return;
     if (!navigator.geolocation) {
-      setGpsResult({ inside: false, text: '⚠️ Browser tidak mendukung Geolocation.' });
+      setGpsResult({ inside: false, text: 'Browser tidak mendukung Geolocation.' });
       return;
     }
 
@@ -177,7 +199,7 @@ export default function MapPage() {
           });
           userMarkerRef.current = L.marker([lat, lng], { icon: pulseIcon })
             .addTo(mapInstance.current)
-            .bindPopup(`<b>${inside ? '🔴 Kamu di zona armband!' : '🟢 Kamu di luar zona armband'}</b><br><small>${lat.toFixed(5)}, ${lng.toFixed(5)}</small>`)
+            .bindPopup(`<b>${inside ? 'Kamu di zona armband!' : 'Kamu di luar zona armband'}</b><br><small>${lat.toFixed(5)}, ${lng.toFixed(5)}</small>`)
             .openPopup();
           mapInstance.current.flyTo([lat, lng], 16, { duration: 1.5 });
         });
@@ -185,13 +207,13 @@ export default function MapPage() {
         setGpsResult({
           inside,
           text: inside
-            ? `🔴 Kamu BERADA di zona wajib armband! (${lat.toFixed(5)}, ${lng.toFixed(5)})`
-            : `🟢 Kamu berada di LUAR zona armband. (${lat.toFixed(5)}, ${lng.toFixed(5)})`,
+            ? `Kamu BERADA di zona wajib armband! (${lat.toFixed(5)}, ${lng.toFixed(5)})`
+            : `Kamu berada di LUAR zona armband. (${lat.toFixed(5)}, ${lng.toFixed(5)})`,
         });
         setLocating(false);
       },
       (err) => {
-        setGpsResult({ inside: false, text: `⚠️ Gagal mendapatkan lokasi: ${err.message}` });
+        setGpsResult({ inside: false, text: `Gagal mendapatkan lokasi: ${err.message}` });
         setLocating(false);
       },
       { enableHighAccuracy: true, timeout: 10000 }
@@ -211,7 +233,7 @@ export default function MapPage() {
       );
       const data = await res.json();
       if (!data?.length) {
-        setSearchResult({ inside: false, text: '❌ Alamat tidak ditemukan.' });
+        setSearchResult({ inside: false, text: 'Alamat tidak ditemukan.' });
         return;
       }
       const lat    = parseFloat(data[0].lat);
@@ -227,7 +249,7 @@ export default function MapPage() {
         });
         userMarkerRef.current = L.marker([lat, lng], { icon })
           .addTo(mapInstance.current)
-          .bindPopup(`<b>${inside ? '🔴 Zona Armband' : '🔵 Luar Zona'}</b><br><small>${data[0].display_name}</small>`)
+          .bindPopup(`<b>${inside ? 'Zona Armband' : 'Luar Zona'}</b><br><small>${data[0].display_name}</small>`)
           .openPopup();
         mapInstance.current.flyTo([lat, lng], 16, { duration: 1.2 });
       });
@@ -235,11 +257,11 @@ export default function MapPage() {
       setSearchResult({
         inside,
         text: inside
-          ? `✅ "${data[0].display_name.split(',')[0]}" — MASUK zona armband.`
-          : `⛔ "${data[0].display_name.split(',')[0]}" — TIDAK masuk zona armband.`,
+          ? `"${data[0].display_name.split(',')[0]}" — MASUK zona armband.`
+          : `"${data[0].display_name.split(',')[0]}" — TIDAK masuk zona armband.`,
       });
     } catch {
-      setSearchResult({ inside: false, text: '⚠️ Gagal mencari. Periksa koneksi.' });
+      setSearchResult({ inside: false, text: 'Gagal mencari. Periksa koneksi.' });
     } finally {
       setSearching(false);
     }
@@ -247,29 +269,15 @@ export default function MapPage() {
 
   /* ─────────── RENDER ─────────── */
   return (
-    <div style={{ maxWidth: 1000 }}>
+    <div>
       {/* Header */}
-      <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-        <div>
-          <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--primary)', marginBottom: 4 }}>
-            🗺️ Peta Zonasi Armband
-          </h1>
-          <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
-            Cek apakah lokasi kamu masuk dalam zona wajib armband kaderisasi.
-          </p>
-        </div>
-        
-        {/* Download Buttons */}
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <a
-            href="draft-aturan-peserta.pdf"
-            download="Aturan-Peserta-PROXIMITI.pdf"
-            className="btn btn-primary"
-            style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', whiteSpace: 'nowrap', fontSize: 13, padding: '6px 12px' }}
-          >
-            ⬇️ Aturan Peserta
-          </a>
-        </div>
+      <div style={{ marginBottom: 20 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--primary)', marginBottom: 4 }}>
+          Peta Zonasi Armband
+        </h1>
+        <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>
+          Cek apakah lokasi kamu masuk dalam zona wajib armband kaderisasi.
+        </p>
       </div>
 
       {/* GPS Button */}
@@ -287,7 +295,10 @@ export default function MapPage() {
               Mendeteksi lokasi...
             </>
           ) : (
-            <>📍 Temukan Lokasi Saya</>
+            <>
+              <IconLocate />
+              Temukan Lokasi Saya
+            </>
           )}
         </button>
       </div>
@@ -320,7 +331,9 @@ export default function MapPage() {
           className="btn btn-primary"
           onClick={handleSearch}
           disabled={searching}
+          style={{ display: 'flex', alignItems: 'center', gap: 6 }}
         >
+          <IconSearch />
           {searching ? '...' : 'Cek'}
         </button>
       </div>
@@ -368,7 +381,10 @@ export default function MapPage() {
       {/* Zone list */}
       <div className="card">
         <div className="card-header">
-          <div className="card-title">📍 Daftar Zona & Referensi</div>
+          <div className="card-title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <IconPin />
+            Daftar Zona & Referensi
+          </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 10 }}>
           {ZONES.map(z => (
@@ -376,14 +392,13 @@ export default function MapPage() {
               key={z.id}
               id={`btn-zone-${z.id}`}
               onClick={() => mapInstance.current?.flyTo(z.center, 16, { duration: 1 })}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 10, padding: '12px 14px',
-                background: 'var(--surface-alt)', border: '1px solid var(--border)',
-                borderRadius: 'var(--radius)', cursor: 'pointer', textAlign: 'left',
-                fontFamily: 'inherit', transition: 'var(--transition)',
-              }}
+              className="zone-btn"
             >
-              <span style={{ fontSize: 22 }}>{z.emoji}</span>
+              <div style={{
+                width: 10, height: 10, borderRadius: '50%',
+                background: z.color, flexShrink: 0,
+                border: '2px solid #fff', boxShadow: `0 0 0 1px ${z.color}40`,
+              }} />
               <div>
                 <div style={{ fontSize: 13, fontWeight: 600 }}>{z.name}</div>
                 <span className={`badge ${z.type === 'zona' ? 'badge-danger' : 'badge-warning'}`} style={{ marginTop: 2 }}>
@@ -402,6 +417,24 @@ export default function MapPage() {
         }
         @keyframes spin {
           to { transform: rotate(360deg); }
+        }
+        .zone-btn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 14px;
+          background: var(--surface-alt);
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          cursor: pointer;
+          text-align: left;
+          font-family: inherit;
+          transition: all 0.15s ease;
+        }
+        .zone-btn:hover {
+          background: var(--primary-bg);
+          border-color: var(--primary);
+          box-shadow: 0 2px 8px rgba(53,91,49,0.1);
         }
       `}</style>
     </div>

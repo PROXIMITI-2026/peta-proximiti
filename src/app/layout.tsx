@@ -12,6 +12,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "PROXIMITI Dashboard — Kaderisasi",
   description: "Dashboard terpusat untuk manajemen peserta dan panitia kaderisasi PROXIMITI — Telkom University.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo-proximiti.png",
+  },
 };
 
 export default function RootLayout({
